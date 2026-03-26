@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>justfile</string>
+		<string>Justfile</string>
+		<string>.justfile</string>
+	</array>
+	<key>name</key>
+	<string>Just</string>
+	<key>scopeName</key>
+	<string>source.just</string>
+	<key>uuid</key>
+	<string>B2C3D4E5-JUST-4F6E-8A9B-1C2D3E4F5A6B</string>
+	<key>patterns</key>
+	<array>
+		<!-- Comments -->
+		<dict>
+			<key>match</key>
+			<string>^(\s*)#(.*)$</string>
+			<key>name</key>
+			<string>comment.line.number-sign.just</string>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>comment.line.number-sign.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Shebang lines in recipe bodies -->
+		<dict>
+			<key>match</key>
+			<string>^\s{4}#!.*$</string>
+			<key>name</key>
+			<string>comment.line.shebang.just</string>
+		</dict>
+
+		<!-- Import and mod statements -->
+		<dict>
+			<key>match</key>
+			<string>^(import|mod)\s*(.*)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.import.just</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Set statements -->
+		<dict>
+			<key>match</key>
+			<string>^(set)\s+(allow-duplicate-recipes|allow-duplicate-variables|dotenv-load|dotenv-filename|dotenv-override|dotenv-path|dotenv-required|export|fallback|ignore-comments|lazy|positional-arguments|quiet|script-interpreter|shell|tempdir|unstable|windows-shell|working-directory)\s*(:=)\s*(.*)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.set.just</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.constant.setting.just</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.just</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Alias -->
+		<dict>
+			<key>match</key>
+			<string>^(alias)\s+(\S+)\s*(:=)\s*(\S+)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.alias.just</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.just</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.just</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.target.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Export variable assignment -->
+		<dict>
+			<key>match</key>
+			<string>^(export|unexport)\s+([A-Za-z_][A-Za-z0-9_-]*)\s*(:=)\s*</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.export.just</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.other.just</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Variable assignment (with := ) -->
+		<dict>
+			<key>match</key>
+			<string>^([A-Za-z_][A-Za-z0-9_-]*)\s*(:=)\s*</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.other.just</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Interpolation {{ }} -->
+		<dict>
+			<key>match</key>
+			<string>\{\{([^}]*)\}\}</string>
+			<key>name</key>
+			<string>meta.interpolation.just</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>variable.other.interpolation.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- If/else expressions -->
+		<dict>
+			<key>match</key>
+			<string>\b(if|else)\b</string>
+			<key>name</key>
+			<string>keyword.control.conditional.just</string>
+		</dict>
+
+		<!-- Boolean constants -->
+		<dict>
+			<key>match</key>
+			<string>\b(true|false)\b</string>
+			<key>name</key>
+			<string>constant.language.boolean.just</string>
+		</dict>
+
+		<!-- Comparison and logical operators -->
+		<dict>
+			<key>match</key>
+			<string>(==|!=|=~|&amp;&amp;|\|\|)</string>
+			<key>name</key>
+			<string>keyword.operator.comparison.just</string>
+		</dict>
+
+		<!-- Built-in functions -->
+		<dict>
+			<key>match</key>
+			<string>\b(env|env_var|env_var_or_default|require|which|arch|os|os_family|num_cpus|invocation_directory|invocation_directory_native|justfile|justfile_directory|source_file|source_directory|just_executable|just_pid|is_dependency|uuid|choose|sha256|sha256_file|blake3|blake3_file|datetime|datetime_utc|shell|semver_matches|error|read|style|absolute_path|canonicalize|clean|join|extension|file_name|file_stem|parent_directory|without_extension|path_exists|append|prepend|encode_uri_component|quote|replace|replace_regex|trim|trim_start|trim_end|trim_start_match|trim_end_match|trim_start_matches|trim_end_matches|capitalize|lowercase|uppercase|snakecase|kebabcase|titlecase|uppercamelcase|lowercamelcase|home_directory|config_directory|data_directory|cache_directory|executable_directory)\s*\(</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.builtin.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Built-in constants -->
+		<dict>
+			<key>match</key>
+			<string>\b(HEX|HEXLOWER|HEXUPPER|PATH_SEP|PATH_VAR_SEP|CLEAR|NORMAL|BOLD|ITALIC|UNDERLINE|INVERT|HIDE|STRIKETHROUGH|BLACK|RED|GREEN|YELLOW|BLUE|MAGENTA|CYAN|WHITE|BG_BLACK|BG_RED|BG_GREEN|BG_YELLOW|BG_BLUE|BG_MAGENTA|BG_CYAN|BG_WHITE)\b</string>
+			<key>name</key>
+			<string>constant.language.just</string>
+		</dict>
+
+		<!-- Recipe definition: name params*: deps* -->
+		<dict>
+			<key>match</key>
+			<string>^(@?[a-zA-Z_][a-zA-Z0-9_-]*)((?:\s+(?:\$?[a-zA-Z_][a-zA-Z0-9_-]*(?:=[^\s:]+)?|\*[a-zA-Z_][a-zA-Z0-9_-]*|\+[a-zA-Z_][a-zA-Z0-9_-]*))*)\s*(:)(.*)$</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.recipe.just</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.just</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.recipe.just</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.dependency.just</string>
+				</dict>
+			</dict>
+		</dict>
+
+		<!-- Recipe body lines (indented with spaces/tabs) -->
+		<dict>
+			<key>begin</key>
+			<string>^(    |\t)</string>
+			<key>end</key>
+			<string>$</string>
+			<key>name</key>
+			<string>meta.recipe-body.just</string>
+			<key>patterns</key>
+			<array>
+				<!-- Recipe line prefix characters -->
+				<dict>
+					<key>match</key>
+					<string>^[ \t]*([@\-])</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.prefix.just</string>
+						</dict>
+					</dict>
+				</dict>
+				<!-- Interpolation in recipe body -->
+				<dict>
+					<key>match</key>
+					<string>\{\{([^}]*)\}\}</string>
+					<key>name</key>
+					<string>variable.other.interpolation.just</string>
+				</dict>
+				<!-- Include shell grammar -->
+				<dict>
+					<key>include</key>
+					<string>#strings</string>
+				</dict>
+			</array>
+		</dict>
+
+		<!-- Strings -->
+		<dict>
+			<key>include</key>
+			<string>#strings</string>
+		</dict>
+
+		<!-- Backtick expressions (shell capture) -->
+		<dict>
+			<key>include</key>
+			<string>#backticks</string>
+		</dict>
+	</array>
+
+	<key>repository</key>
+	<dict>
+		<key>strings</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<!-- Triple double-quoted strings -->
+				<dict>
+					<key>begin</key>
+					<string>[fx]?"""</string>
+					<key>end</key>
+					<string>"""</string>
+					<key>name</key>
+					<string>string.quoted.triple.double.just</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\\.</string>
+							<key>name</key>
+							<string>constant.character.escape.just</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\{\{[^}]*\}\}</string>
+							<key>name</key>
+							<string>variable.other.interpolation.just</string>
+						</dict>
+					</array>
+				</dict>
+				<!-- Triple single-quoted strings -->
+				<dict>
+					<key>begin</key>
+					<string>[fx]?'''</string>
+					<key>end</key>
+					<string>'''</string>
+					<key>name</key>
+					<string>string.quoted.triple.single.just</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\{\{[^}]*\}\}</string>
+							<key>name</key>
+							<string>variable.other.interpolation.just</string>
+						</dict>
+					</array>
+				</dict>
+				<!-- Double-quoted strings -->
+				<dict>
+					<key>begin</key>
+					<string>[fx]?"</string>
+					<key>end</key>
+					<string>"</string>
+					<key>name</key>
+					<string>string.quoted.double.just</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\\.</string>
+							<key>name</key>
+							<string>constant.character.escape.just</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\{\{[^}]*\}\}</string>
+							<key>name</key>
+							<string>variable.other.interpolation.just</string>
+						</dict>
+					</array>
+				</dict>
+				<!-- Single-quoted strings -->
+				<dict>
+					<key>begin</key>
+					<string>[fx]?'</string>
+					<key>end</key>
+					<string>'</string>
+					<key>name</key>
+					<string>string.quoted.single.just</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\{\{[^}]*\}\}</string>
+							<key>name</key>
+							<string>variable.other.interpolation.just</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>backticks</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<!-- Triple backtick expressions -->
+				<dict>
+					<key>begin</key>
+					<string>```</string>
+					<key>end</key>
+					<string>```</string>
+					<key>name</key>
+					<string>string.interpolated.backtick.triple.just</string>
+				</dict>
+				<!-- Single backtick expressions -->
+				<dict>
+					<key>begin</key>
+					<string>`</string>
+					<key>end</key>
+					<string>`</string>
+					<key>name</key>
+					<string>string.interpolated.backtick.just</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>
