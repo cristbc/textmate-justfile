@@ -2,9 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>name</key>
-	<string>Just</string>
-	<key>uuid</key>
-	<string>A1B2C3D4-JUST-4F6E-8A9B-0C1D2E3F4A5B</string>
+  <key>name</key>
+  <string>Just</string>
+
+  <key>uuid</key>
+  <string>A1B2C3D4-1A2B-4F6E-8A9B-0C1D2E3F4A5B</string>
+
+  <key>ordering</key>
+  <array>
+    <string>B2C3D4E5-1B2C-4F6E-8A9B-1C2D3E4F5A6B</string>
+  </array>
+
+  <key>contactName</key>
+  <string>Ben Crist</string>
+
+  <key>description</key>
+  <string>TextMate language bundle for justfile syntax highlighting.</string>
+
+  <key>mainMenu</key>
+  <dict>
+    <key>items</key>
+    <array/>
+  </dict>
 </dict>
 </plist>
